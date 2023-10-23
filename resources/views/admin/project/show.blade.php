@@ -87,10 +87,10 @@
                         </tr>
                         <tr>
                             <th>
-                                {{ trans('cruds.project.fields.assignee') }}
+                                {{ trans('cruds.project.fields.assignees') }}
                             </th>
                             <td>
-                                @foreach($project->assignee as $key => $entry)
+                                @foreach($project->assignees as $key => $entry)
                                     <span class="badge badge-relationship">{{ $entry->email }}</span>
                                 @endforeach
                             </td>

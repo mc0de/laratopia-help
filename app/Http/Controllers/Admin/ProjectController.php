@@ -38,7 +38,7 @@ class ProjectController extends Controller
     {
         abort_if(Gate::denies('project_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $project->load('owner', 'package', 'assignee', 'team');
+        $project->load('owner', 'package', 'assignees', 'team');
 
         return view('admin.project.show', compact('project'));
     }
