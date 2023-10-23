@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\UsersAssignedToNewProject;
+use App\Listeners\SendEmailToProjectAssignees;
 use App\Models\Ad as AdModel;
 use App\Models\Application as ApplicationModel;
 use App\Models\Design as DesignModel;
@@ -43,7 +45,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
-
+        ],
+        UsersAssignedToNewProject::class => [
+            SendEmailToProjectAssignees::class,
         ],
     ];
 

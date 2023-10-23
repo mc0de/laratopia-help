@@ -28,5 +28,8 @@ class UsersTableSeeder extends Seeder
         // Add some packages
         Package::create(['name' => 'Package XX']);
         Package::create(['name' => 'Package YY']);
+
+        // Add some users to assign to project
+        User::factory(5)->create();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Project;
 
+use App\Events\UsersAssignedToNewProject;
 use App\Models\Package;
 use App\Models\Project;
 use App\Models\Team;
@@ -36,6 +37,8 @@ class Create extends Component
         $this->project->save();
         $this->project->package()->sync($this->package);
         $this->project->assignees()->sync($this->assignees);
+
+        event(new UsersAssignedToNewProject($this->project));
 
         return redirect()->route('admin.projects.index');
     }
