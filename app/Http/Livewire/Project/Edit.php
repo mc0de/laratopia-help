@@ -14,15 +14,15 @@ class Edit extends Component
 
     public array $package = [];
 
-    public array $assignee = [];
+    public array $assignees = [];
 
     public array $listsForFields = [];
 
     public function mount(Project $project)
     {
-        $this->project  = $project;
-        $this->package  = $this->project->package()->pluck('id')->toArray();
-        $this->assignee = $this->project->assignee()->pluck('id')->toArray();
+        $this->project   = $project;
+        $this->package   = $this->project->package()->pluck('id')->toArray();
+        $this->assignees = $this->project->assignees()->pluck('id')->toArray();
         $this->initListsForFields();
     }
 
@@ -37,7 +37,7 @@ class Edit extends Component
 
         $this->project->save();
         $this->project->package()->sync($this->package);
-        $this->project->assignee()->sync($this->assignee);
+        $this->project->assignees()->sync($this->assignees);
 
         return redirect()->route('admin.projects.index');
     }
@@ -75,11 +75,11 @@ class Edit extends Component
                 'nullable',
                 'in:' . implode(',', array_keys($this->listsForFields['statues'])),
             ],
-            'assignee' => [
+            'assignees' => [
                 'required',
                 'array',
             ],
-            'assignee.*.id' => [
+            'assignees.*.id' => [
                 'integer',
                 'exists:users,id',
             ],
@@ -93,10 +93,10 @@ class Edit extends Component
 
     protected function initListsForFields(): void
     {
-        $this->listsForFields['owner']    = User::pluck('name', 'id')->toArray();
-        $this->listsForFields['package']  = Package::pluck('name', 'id')->toArray();
-        $this->listsForFields['statues']  = $this->project::STATUES_RADIO;
-        $this->listsForFields['assignee'] = User::pluck('email', 'id')->toArray();
-        $this->listsForFields['team']     = Team::pluck('name', 'id')->toArray();
+        $this->listsForFields['owner']     = User::pluck('name', 'id')->toArray();
+        $this->listsForFields['package']   = Package::pluck('name', 'id')->toArray();
+        $this->listsForFields['statues']   = $this->project::STATUES_RADIO;
+        $this->listsForFields['assignees'] = User::pluck('email', 'id')->toArray();
+        $this->listsForFields['team']      = Team::pluck('name', 'id')->toArray();
     }
 }

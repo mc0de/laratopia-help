@@ -12,7 +12,7 @@ use Livewire\WithPagination;
 
 class Index extends Component
 {
-    use WithPagination, WithSorting, WithConfirmation;
+    use WithConfirmation, WithPagination, WithSorting;
 
     public int $perPage;
 
@@ -67,7 +67,7 @@ class Index extends Component
 
     public function render()
     {
-        $query = Project::with(['owner', 'package', 'assignee', 'team'])->advancedFilter([
+        $query = Project::with(['owner', 'package', 'assignees', 'team'])->advancedFilter([
             's'               => $this->search ?: null,
             'order_column'    => $this->sortBy,
             'order_direction' => $this->sortDirection,

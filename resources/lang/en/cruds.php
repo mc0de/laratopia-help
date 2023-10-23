@@ -99,8 +99,8 @@ return [
             'end_date_helper'   => ' ',
             'statues'           => 'Statues',
             'statues_helper'    => ' ',
-            'assignee'          => 'Assignee',
-            'assignee_helper'   => ' ',
+            'assignees'         => 'Assignees',
+            'assignees_helper'  => ' ',
         ],
     ],
     'auditLog' => [

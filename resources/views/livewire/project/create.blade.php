@@ -62,14 +62,14 @@
             {{ trans('cruds.project.fields.statues_helper') }}
         </div>
     </div>
-    <div class="form-group {{ $errors->has('assignee') ? 'invalid' : '' }}">
-        <label class="form-label required" for="assignee">{{ trans('cruds.project.fields.assignee') }}</label>
-        <x-select-list class="form-control" required id="assignee" name="assignee" wire:model="assignee" :options="$this->listsForFields['assignee']" multiple />
+    <div class="form-group {{ $errors->has('assignees') ? 'invalid' : '' }}">
+        <label class="form-label required" for="assignees">{{ trans('cruds.project.fields.assignees') }}</label>
+        <x-select-list class="form-control" required id="assignees" name="assignees" wire:model="assignees" :options="$this->listsForFields['assignees']" multiple />
         <div class="validation-message">
-            {{ $errors->first('assignee') }}
+            {{ $errors->first('assignees') }}
         </div>
         <div class="help-block">
-            {{ trans('cruds.project.fields.assignee_helper') }}
+            {{ trans('cruds.project.fields.assignees_helper') }}
         </div>
     </div>
     <div class="form-group {{ $errors->has('project.team_id') ? 'invalid' : '' }}">

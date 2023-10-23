@@ -78,7 +78,7 @@
                             @include('components.table.sort', ['field' => 'statues'])
                         </th>
                         <th>
-                            {{ trans('cruds.project.fields.assignee') }}
+                            {{ trans('cruds.project.fields.assignees') }}
                         </th>
                         <th>
                             {{ trans('cruds.project.fields.updated_at') }}
@@ -136,7 +136,7 @@
                                 {{ $project->statues_label }}
                             </td>
                             <td>
-                                @foreach($project->assignee as $key => $entry)
+                                @foreach($project->assignees as $key => $entry)
                                     <span class="badge badge-relationship">{{ $entry->email }}</span>
                                 @endforeach
                             </td>

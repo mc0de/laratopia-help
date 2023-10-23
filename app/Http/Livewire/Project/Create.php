@@ -14,7 +14,7 @@ class Create extends Component
 
     public array $package = [];
 
-    public array $assignee = [];
+    public array $assignees = [];
 
     public array $listsForFields = [];
 
@@ -35,7 +35,7 @@ class Create extends Component
 
         $this->project->save();
         $this->project->package()->sync($this->package);
-        $this->project->assignee()->sync($this->assignee);
+        $this->project->assignees()->sync($this->assignees);
 
         return redirect()->route('admin.projects.index');
     }
@@ -73,11 +73,11 @@ class Create extends Component
                 'nullable',
                 'in:' . implode(',', array_keys($this->listsForFields['statues'])),
             ],
-            'assignee' => [
+            'assignees' => [
                 'required',
                 'array',
             ],
-            'assignee.*.id' => [
+            'assignees.*.id' => [
                 'integer',
                 'exists:users,id',
             ],
@@ -91,10 +91,10 @@ class Create extends Component
 
     protected function initListsForFields(): void
     {
-        $this->listsForFields['owner']    = User::pluck('name', 'id')->toArray();
-        $this->listsForFields['package']  = Package::pluck('name', 'id')->toArray();
-        $this->listsForFields['statues']  = $this->project::STATUES_RADIO;
-        $this->listsForFields['assignee'] = User::pluck('email', 'id')->toArray();
-        $this->listsForFields['team']     = Team::pluck('name', 'id')->toArray();
+        $this->listsForFields['owner']     = User::pluck('name', 'id')->toArray();
+        $this->listsForFields['package']   = Package::pluck('name', 'id')->toArray();
+        $this->listsForFields['statues']   = $this->project::STATUES_RADIO;
+        $this->listsForFields['assignees'] = User::pluck('email', 'id')->toArray();
+        $this->listsForFields['team']      = Team::pluck('name', 'id')->toArray();
     }
 }

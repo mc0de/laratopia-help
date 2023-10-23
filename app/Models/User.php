@@ -17,7 +17,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements HasLocalePreference
 {
-    use HasFactory, HasAdvancedFilter, Notifiable, HasTeam, SoftDeletes;
+    use HasAdvancedFilter, HasFactory, HasTeam, Notifiable, SoftDeletes;
 
     public $table = 'users';
 
@@ -83,16 +83,6 @@ class User extends Authenticatable implements HasLocalePreference
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
-    }
-
-    public function getEmailVerifiedAtAttribute($value)
-    {
-        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('project.datetime_format')) : null;
-    }
-
-    public function setEmailVerifiedAtAttribute($value)
-    {
-        $this->attributes['email_verified_at'] = $value ? Carbon::createFromFormat(config('project.datetime_format'), $value)->format('Y-m-d H:i:s') : null;
     }
 
     public function setPasswordAttribute($input)

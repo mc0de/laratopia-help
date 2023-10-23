@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Project extends Model
 {
-    use HasFactory, HasAdvancedFilter, SoftDeletes, Tenantable, Auditable;
+    use Auditable, HasAdvancedFilter, HasFactory, SoftDeletes, Tenantable;
 
     public $table = 'projects';
 
@@ -62,7 +62,7 @@ class Project extends Model
         'start_date',
         'end_date',
         'statues',
-        'assignee.email',
+        'assignees.email',
         'updated_at',
         'deleted_at',
         'team.name',
@@ -113,7 +113,7 @@ class Project extends Model
         return static::STATUES_RADIO[$this->statues] ?? null;
     }
 
-    public function assignee()
+    public function assignees()
     {
         return $this->belongsToMany(User::class);
     }
